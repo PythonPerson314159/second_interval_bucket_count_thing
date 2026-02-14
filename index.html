@@ -137,16 +137,15 @@ document.getElementById("wiwi").value=sesnum
 function doit(ee){
 things1=things0.filter(item=>item[0]>=ee&&item[0]<ee*1+1)
 things2=things1.map(item=>item[0])
-
+qwerty=''
 if(things1.length*interval>=0.75){
 things11=[...Array(1/interval).keys()].map(item=>(item+ee*(1/interval))/(1/interval)).filter(item=>things2.includes(item*1)==false).map(item=>item.toFixed(-Math.log10(interval)))
-document.getElementById("infopanel").innerHTML="<h2>All but:</h2>"+things11.join("<br>")
+qwerty="<h2>All but:</h2>"+things11.join("<br>")+"<br>"
 }
-else{
 things1=things1.map(item=>[item[0].toFixed(-Math.log10(interval)),item[1]])
 
-document.getElementById("infopanel").innerHTML="<h2>Unique values:</h2>"+things1.map(item=>[item.join(" x")+" ",item[0]]).map(item=>item[0].replace(" x1 ","")).join("<br>")
-}
+document.getElementById("infopanel").innerHTML=qwerty+"<h2>Unique values:</h2>"+things1.map(item=>[item.join(" x")+" ",item[0]]).map(item=>item[0].replace(" x1 ","")).join("<br>")
+
 
 }
 
@@ -209,3 +208,4 @@ text-align:center;
 }
 
 </style>
+
