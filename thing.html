@@ -1,0 +1,211 @@
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cubing Times Seconds Bracket Counter</title>
+</head>
+
+<center><h1>Cubing Times Seconds Bracket Counter</h1>
+<h3>Import your times (CSTimer export or raw input) and see how many unique times in each second bracket you've achieved.</h3>
+<div id=bla>
+<input type="file" id="wew" accept=".txt"></input>
+	<button onclick="change()">Or, enter raw times</button><br><br>
+<div id="aaaa"></div>
+</div>
+</center>
+<div id=qwe>
+Interval: <button id="wewqo" onclick="this.innerHTML=['0.01s','0.001s'][(this.innerHTML=='0.01s')*1];doo();doit(document.getElementById('infopanel').innerHTML.split('<br>')[1].split('.')[0])">0.01s</button></div><br><br>
+
+<div><div id="aaa"></div>
+<div id="infopanel"></div>
+
+<script>
+idid="wew"
+function change(){
+document.getElementById("aaaa").innerHTML="<h2>Enter times here (comma seperated or one per line)</h2><textarea id=qqq placeholder='Enter times here...'></textarea><br><button onclick=subb()>Submit</button>"
+}
+function revert(){
+idid=idid+"q"
+document.getElementById("bla").innerHTML='<input type="file" id="'+idid+'" accept=".txt"></input><button onclick="change()">Or, enter raw times</button><br><br><div id="aaaa"></div>'
+document.getElementById(idid).addEventListener('change', function(event) {
+console.log("eee")
+    const file = event.target.files[0]; // Get the first selected file
+    if (file) {
+        readFileContent(file); // Call the function to read the file
+    }
+});
+document.getElementById("infopanel").innerHTML=""
+document.getElementById("aaa").innerHTML=""
+document.getElementById('qwe').innerHTML="Interval: <button id="+(idid+"qo")+" onclick='comemand()'>0.01s</button>"
+
+
+}
+function comemand(){
+id=idid+"qo"
+    document.getElementById(id).innerHTML=['0.01s','0.001s'][(document.getElementById(id).innerHTML=='0.01s')*1]
+	doo()
+	doit(document.getElementById('infopanel').innerHTML.split('<br>')[1].split('.')[0])
+}
+function subb(){
+sesss=document.getElementById("qqq").value.split("\n").map(item=>item.split(",")).flat().filter(item=>item!=" "&&item!="")
+document.getElementById("bla").innerHTML=""
+document.getElementById("qwe").innerHTML=document.getElementById("qwe").innerHTML+"<button style=float:right onclick=revert()>Go back</button>"
+
+doo((idid+"qo"))
+}
+
+document.getElementById(idid).addEventListener('change', function(event) {
+console.log("eee")
+    const file = event.target.files[0]; // Get the first selected file
+    if (file) {
+        readFileContent(file); // Call the function to read the file
+    }
+});
+
+function readFileContent(file) {
+console.log("ee")
+document.getElementById("qwe").innerHTML=document.getElementById("qwe").innerHTML+"<button style=float:right onclick=revert()>Go back</button>"
+
+    const reader = new FileReader();
+    reader.onload = function(ed) {
+      const content = ed.target.result; // File content
+eval("e="+content)
+document.getElementById("bla").innerHTML=""
+doo()
+    };
+    reader.readAsText(file); // Read the file as text
+}
+
+
+function doo(){
+interval=document.getElementById(idid+"qo").innerHTML.slice(0,-1)
+
+if (document.getElementById("wiwi")==null){
+sesnum=1
+}
+else{
+sesnum=document.getElementById("wiwi").value
+}
+if (typeof sesss=='undefined'){
+ses=eval("e.session"+sesnum+".map(item=>item[0][1]/1000)")
+}
+else{
+ses=[...sesss]
+}
+
+sesh=ses.map(item=>Math.floor(item*(1/interval))/(1/interval))
+
+sesh.sort((a,b)=>a-b)
+
+
+things=[]
+tote=0
+toto=0
+
+for (x in sesh){
+if (sesh[x]!=sesh[x*1+1]){
+    tote+=1
+	}
+	toto+=1
+    if (Math.floor(sesh[x])!=Math.floor(sesh[x*1+1])){
+    things.push([Math.floor(sesh[x]),tote,toto])
+        tote=0
+		toto=0
+    }
+}
+
+
+tott=''
+tote=0
+things0=[]
+for (x in sesh){
+    tote+=1
+    if (sesh[x]!=sesh[x*1+1]){
+    things0.push([sesh[x],tote])
+        tote=0
+    }
+}
+
+
+tot='<center>Session <select id=wiwi onchange="doo()"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option></select></center>'
+for (x in things){
+tot+="<div class=all id="+things[x][0]+" onclick='doit("+things[x][0]+")' "+["style='color:#606060'",""][(things[x][1]>(0.1/interval))*1]+"><span class='divv'>"+wer(things[x][0])+".xx"+"x "[(interval>=0.01)*1]+"</span><span class='div'>"+things[x][1]+" unique value(s)</span></div>"
+}
+document.getElementById("aaa").innerHTML=tot
+document.getElementById("wiwi").value=sesnum
+
+}
+
+function doit(ee){
+things1=things0.filter(item=>item[0]>=ee&&item[0]<ee*1+1)
+things2=things1.map(item=>item[0])
+
+if(things1.length*interval>=0.75){
+things11=[...Array(1/interval).keys()].map(item=>(item+ee*(1/interval))/(1/interval)).filter(item=>things2.includes(item*1)==false).map(item=>item.toFixed(-Math.log10(interval)))
+document.getElementById("infopanel").innerHTML="<h2>All but:</h2>"+things11.join("<br>")
+}
+else{
+things1=things1.map(item=>[item[0].toFixed(-Math.log10(interval)),item[1]])
+
+document.getElementById("infopanel").innerHTML="<h2>Unique values:</h2>"+things1.map(item=>[item.join(" x")+" ",item[0]]).map(item=>item[0].replace(" x1 ","")).join("<br>")
+}
+
+}
+
+function wer(e){
+if (e<60){
+return e
+}
+else{
+return Math.floor(e/60)+":"+(e%60).toString().padStart(2,0)
+}}
+</script>
+
+<style>
+html{
+background:#202020;
+color:#ffffff;
+font-family: Calibri;
+align-items:center;
+padding-left:100px;
+padding-right:100px;
+}
+#infopanel{
+text-align:center;
+}	
+.all{
+font-size:30px;
+width:60vw;
+height:35px;
+margin: auto;
+margin-bottom:10px;
+padding: 20px;
+border-radius: 20px;
+align-items:center;
+background-color:#303030;
+}
+.div{
+float:right
+}
+.divv{
+float:left;
+}
+button{
+border-radius:4px;
+font-size:20px;
+}
+input{
+border-radius:4px;
+font-size:20px;
+}
+textarea{
+height:200px;
+}
+input[type="file"] {
+    color: rgba(0, 0, 0, 0); /* Makes the text transparent */
+	width:200px;
+}
+.qq{
+width:300px;
+text-align:center;
+}
+
+</style>
