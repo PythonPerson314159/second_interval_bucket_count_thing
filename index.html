@@ -91,7 +91,7 @@ else{
 ses=[...sesss]
 }
 
-sesh=ses.map(item=>Math.floor(item*(1/interval))/(1/interval))
+sesh=ses.map(item=>Math.round(item*(1/interval))/(1/interval))
 
 sesh.sort((a,b)=>a-b)
 
@@ -208,4 +208,5 @@ text-align:center;
 }
 
 </style>
+
 
